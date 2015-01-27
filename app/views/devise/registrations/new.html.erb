@@ -1,5 +1,11 @@
-<%= render 'nav' %>
+<style>
+.whole {
+  text-align:center;
+}
+</style>
 
+<%= render 'nav' %>
+<div class="whole">
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -56,6 +62,7 @@
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
+</div>
 <% end %>
 
 <%= render "devise/shared/links" %>
