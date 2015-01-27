@@ -1,51 +1,85 @@
 class EventsController < ApplicationController
-before_action :authenticate_user!
+before_action  :authenticate_user!
  
+  def index
+    @events = Event.all
+    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+    marker.lat event.latitude
+    marker.lng event.longitude
+  end
+end
+
+  def show
+    @user = current_user
+    @event = Event.find(params[:id])
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+    marker.lat event.latitude
+    marker.lng event.longitude
+    end  
+  end
+
   def new
     @event = Event.new
   end
+
   def create
     @event = Event.new(event_params)
-    if @event.save
-      redirect_to @event
-    else
-      render :new
+        respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, notice: 'event was successfully created.' }
+        format.json { render :show, status: :created, location: @event }
+      else
+        format.html { render :new }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
-  def show
-     @event = Event.find(params[:id])
-  end
-  def index
-    @events = Event.all
-  end
+
+
   def edit
     @event = Event.find(params[:id])
   end
+
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(event_params)
-      redirect_to @event
-    else
-      render :edit
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
+
   def destroy
-    event = Event.find(params[:id])
-    event.destroy
-    redirect_to events_path
+    @event.destroy
+    respond_to do |format|
+    format.html { redirect_to events_url, notice: 'User was successfully destroyed.' }
+    format.json { head :no_content }
+    end
   end
+
   
-  private
+private
+  def set_event
+      @event = Event.find(params[:id])
+  end
+
   def event_params
     params.require(:event).permit(
+      :latitude,
+      :longitude,
     	:name,
     	:description,
-        :date,
-        :address,
-        :city,
-        :state,
-        :zipcode,
-        :user_id
+      :date,
+      :address,
+      :city,
+      :state,
+      :zipcode,
+      :user_id
     )
   end
 end
+

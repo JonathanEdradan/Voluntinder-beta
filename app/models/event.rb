@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+
+	geocoded_by :address
 	has_many :users, through: :attendances 
 	has_many :attendances
 	belongs_to :user
@@ -9,4 +11,6 @@ class Event < ActiveRecord::Base
 	validates :city, presence: true
 	validates :state, presence: true
 	validates :zipcode, presence: true
+	after_validation :geocode
+	
 end
