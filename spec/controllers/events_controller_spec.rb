@@ -13,7 +13,7 @@ RSpec.describe EventsController, type: :controller do
       end
       
       it 'assigns @event' do
-        # assigns(:event) evaluates to@ event
+        # assigns(:event) evaluates to @event
         expect(assigns(:event)).to be_a Event
         expect(assigns(:event)).not_to be_persisted
       end
@@ -39,7 +39,7 @@ RSpec.describe EventsController, type: :controller do
             expect(assigns(:event)).to be_persisted
           end
           it 'redirects to the event' do
-            expect(response).to redirect_to event_path(event.last)
+            expect(response).to redirect_to event_path(Event.last)
           end
       end
       context 'invalid params' do
@@ -93,7 +93,7 @@ RSpec.describe EventsController, type: :controller do
           expect(response).to render_template 'events/index'
         end
       it 'assigns @events' do
-          expect(assigns(:events)).to eq event.all
+          expect(assigns(:events)).to eq Event.all
         end
     end
   describe '#edit' do
@@ -123,7 +123,7 @@ RSpec.describe EventsController, type: :controller do
               patch :update, id: event.id, event: {
                 name: 'bar',
                 description: 'foo',
-                date: (Date.today +1.day),
+                date: (Date.today + 1.day),
                 address: '1600 Pennsylvania Ave NW',
                 city: 'Washington',
                 state: 'DC',
@@ -150,27 +150,17 @@ RSpec.describe EventsController, type: :controller do
         end
       context 'invalid params' do
           before  do
-              patch :update, id: event.id, event: {
-              # These params are invalid because they are blank, 
-              #so the validations will fail and the event will# not be updated
-              name: '',
-              description: '',
-              date: '',
-              address: '',
-              city: '',
-              state: '',
-              zipcode: ''
-              }
+              patch :update, id: event.id, event: {name: '',description: '',date: '',address: '',city: '', state: '',zipcode: ''}
             end
           it 'does not update the event' do
               event = assigns(:event).reload
-              expect(event.name).to eq ''
-              expect(event.description).to eq ''
-              expect(event.date).to eq ''
-              expect(event.address).to eq ''
-              expect(event.city).to eq ''
-              expect(event.state).to eq ''
-              expect(event.zipcode).to eq ''
+              expect(event.name).not_to eq ''
+              expect(event.description).not_to eq ''
+              expect(event.date).not_to eq ''
+              expect(event.address).not_to eq ''
+              expect(event.city).not_to eq ''
+              expect(event.state).not_to eq ''
+              expect(event.zipcode).not_to eq ''
             end
           it 'assigns @event' do
               expect(assigns(:event)).to eq event
@@ -185,10 +175,7 @@ RSpec.describe EventsController, type: :controller do
         FactoryGirl.create(:event)
       }
       it 'destroys a event' do
-          expect {
-            delete :destroy,
-            id: event.id
-          }.to change(event, :count).by(-1)
+          expect { delete :destroy, id: event.id}.to change(Event, :count).by(-1)
         end
       it 'redirects to #index' do
           delete :destroy, id: event.id
