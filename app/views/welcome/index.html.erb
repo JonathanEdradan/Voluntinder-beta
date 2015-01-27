@@ -57,6 +57,10 @@
 </script>
 </head>
 <body>
+<% if user_signed_in? %>
+	<%= render 'nav' %>
+<% end %>
+
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
 	<div class = 'home-buttons'>

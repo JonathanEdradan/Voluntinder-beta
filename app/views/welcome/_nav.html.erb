@@ -2,12 +2,12 @@
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-
       </button>
-      <a class="navbar-brand" href="/">Home</a>
-      <% if user_signed_in? %>
-      		<a class="navbar-brand" href="/">Signout</a>
-      	<%end%>
+        <% if user_signed_in? %>
+          <div class="navbar-brand">
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>    
+        <%end%>
+      </div> 
       </div>
   </div>
 </nav>
