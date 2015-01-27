@@ -60,6 +60,7 @@
 <% if user_signed_in? %>
 	<%= render 'nav' %>
 <% end %>
+<%= link_to 'Sign Out', destroy_user_session_path, method: :delete%>
 
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
@@ -72,7 +73,9 @@
 	</div>
 	<div id='home'>
 </div>
+
 </body>
+
 
 
 
