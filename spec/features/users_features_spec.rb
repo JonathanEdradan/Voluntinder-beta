@@ -12,10 +12,10 @@ feature 'Managing users', type: :feature do
 
 		fill_in 'user_first_name', with: 'Jonathan' 
 		fill_in 'user_last_name', with: 'Edradan'
-		fill_in 'user_address', with: '683 Imeprial Dr' 
-		fill_in 'user_city', with: 'Pacifica'
+		fill_in 'user_address', with: '4 Norwood' 
+		fill_in 'user_city', with: 'Daly City'
 		fill_in 'user_state', with: 'CA' 
-		fill_in 'user_zipcode', with: '94044'
+		fill_in 'user_zipcode', with: '94015'
 		fill_in 'user_email', with: 'j@gmail.com'
 		fill_in 'user_password', with: 'password' 
 		fill_in 'user_password_confirmation', with: 'password' 
@@ -26,16 +26,17 @@ feature 'Managing users', type: :feature do
 
 	  # save_and_open_page # 'launchy allows us to use this method'.  launchy saves and opens a new page with our test parameters.
 	end
+
+	scenario 'updating a user' do
+		visit "/users/edit"
+
+    fill_in 'user_first_name', with: 'My new name'
+
+    click_button 'Update'
+
+    expect(page).to have_content 'My new name'
+	end
 end
-
-
-
-
-
-
-
-
-
 
 # 	scenario 'adding a category to a recipe' do
 # 		# Since we are using FactoryGirl (let/given) we don't need line 26.
