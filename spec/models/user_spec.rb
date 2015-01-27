@@ -31,6 +31,5 @@ RSpec.describe User, :type => :model do
   describe 'Associations' do
   	it { is_expected.to have_many :events }
   	it { is_expected.to have_many :attendances }
-  	it { is_expected.to have_many :attended_events, through: :attendances }
   end
 end
