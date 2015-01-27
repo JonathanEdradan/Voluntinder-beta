@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  describe '#new' do
-      before { get :new }
-      
+  let!(:user) {FactoryGirl.create(:user)}
+  before do
+    sign_in(user)
+  end
+  describe '#new' do   
+    before do
+      get :new
+    end   
       it 'returns 200' do
         expect(response).to be_success
       end
