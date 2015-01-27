@@ -1,3 +1,4 @@
+<head>
 <style>
 	.home-buttons{
 		text-align: center;
@@ -19,7 +20,7 @@
 
 	}
 
-	#signin{
+	#signin, #signup{
 		height: 70px;
 		width: 200px;
 		padding: 20px;
@@ -28,19 +29,50 @@
 
 	body {
 		margin: 100px 30px 100px 30px;
- 		background-image: url('http://i60.tinypic.com/33or23d.jpg');
+		
+		background-image: url('http://i60.tinypic.com/zwypeo.jpg');
+ 		/*background-image: url('http://i60.tinypic.com/33or23d.jpg');*/
  		background-size: cover; 
 
  	}
 
 </style>
+
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){ 
+		$('#signin').click(function(){ 
+			$( "#home" ).load( "users/sign_in" );
+			$('.whole').slideUp(1500);
+
+		})
+
+		$('#signup').click(function(){ 
+			$( "#home" ).load( "users/sign_up" );
+			$('.whole').slideUp(1500);
+		
+	})
+	})	
+	
+
+</script>
+</head>
 <body>
+<div class = 'whole'>
 	<h1>Voluntinder</h1>
 	<div class = 'home-buttons'>
 		<ul class = 'buttons-list'>
-			<a href='users/sign_in' id="signin" class="btn btn-warning btn-lg" role="button">Sign In</a> 
-			<a href='users/sign_up' id="signin" class="btn btn-warning btn-lg" role="button">Sign Up</a>
+			<a  id="signin" class="btn btn-warning btn-lg" role="button">Sign In</a> 
+			<a  id="signup" class="btn btn-warning btn-lg" role="button">Sign Up</a>
 		</ul>
 	</div>
+	</div>
+	<div id='home'>
+</div>
 </body>
+
+
+
+
 
