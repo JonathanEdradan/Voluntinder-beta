@@ -10,4 +10,7 @@ class ApplicationController < ActionController::Base
       u.permit(:first_name, :last_name, :address, :city, :state, :zipcode, :email, :password, :password_confirmation)
     end
   end
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || event_path(1)
+  end
 end

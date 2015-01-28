@@ -64,14 +64,17 @@
 
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
+	<% if !user_signed_in? %>
 	<div class = 'home-buttons'>
 		<ul class = 'buttons-list'>
 			<a  id="signin" class="btn btn-warning btn-lg" role="button">Sign In</a> 
 			<a  id="signup" class="btn btn-warning btn-lg" role="button">Sign Up</a>
 		</ul>
 	</div>
+	<% end %>
 	</div>
-	<div id='home'>
+
+<div id='home'>
 </div>
 
 </body>
