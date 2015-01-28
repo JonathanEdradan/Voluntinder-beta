@@ -1,10 +1,10 @@
 require 'rails_helper'
+include Warden::Test::Helpers
 
 # 'feature' same as 'describe', just an alias using capybara
 feature 'Managing users', type: :feature do
 	# let/given allows us to use FactoryGirl throughout our code/tests
-	given(:user) { FactoryGirl.create(:user) }
-  # let(:user) { FactoryGirl.create(:user) }
+	let!(:user) { FactoryGirl.create(:user) }
 
 	# same as 'it' but in capybara we use 'scenerio' - (BDD User story)
 	scenario 'creating a new user' do
@@ -28,13 +28,18 @@ feature 'Managing users', type: :feature do
 	end
 
 	scenario 'updating a user' do
+
+		login_as(user, :scope => :user)
+
 		visit "/users/edit"
 
-    fill_in 'user_first_name', with: 'My new name'
+		# cant find 'user_first_name'
+    fill_in 'user_first_name', with: 'new name!'
+    fill_in 'user_current_password', with: 'password'
 
     click_button 'Update'
 
-    expect(page).to have_content 'My new name'
+    expect(page).to have_content 'Your account has been updated successfully'
 	end
 end
 
