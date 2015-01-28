@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: { registrations: "users/registrations" }\
+
+  # post 'attendances'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :events
+  resources :attendances
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
