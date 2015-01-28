@@ -17,9 +17,11 @@
 
 			$(document).ready(function(){
 				$('#Attend').click(function(){
-					<% @attendance.save %>
+
+					// AJAX function which can use the @attendance
 					event_name = '<%= @event.name %>'
 					appendAttendance(event_name)
+
 				})
 
 				function appendAttendance(attendances) {
@@ -88,12 +90,18 @@
 	</div>
 
 
+
 	<div style='float:left; width: 40%' class="profile">
 
 		<h1> <strong><%= @user.first_name + ' ' + @user.last_name %></strong> </h1>
 		<p> <strong>Events you are planning to attend: </strong></p>
 		<div id='attendanceContainer'>
-
+		<!-- ERB .each  -->
+			<!-- li for each event-->
+		<!-- end -->
+		<% @user.attended_events.each do |event| %>
+			<!-- <li><%= event.name %></li> -->
+		<% end %> 
 		</div>
 
 	</div>

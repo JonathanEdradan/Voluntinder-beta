@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :address, :city, :state, :zipcode, presence: true
 
-  has_many :events, dependent: :destroy
-  has_many :attendances, dependent: :destroy
+  has_many :events
+  has_many :attendances
+  			#method						#join table 		#what is being return
+  has_many :attended_events, through: :attendances, source: :event
 end

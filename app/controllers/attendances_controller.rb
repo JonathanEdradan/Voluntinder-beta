@@ -14,7 +14,6 @@ class AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new(attendance_params)
     @attendance.user = current_user
-
     if @attendance.save
 		render json: @attendance
 	else
