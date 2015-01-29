@@ -10,6 +10,20 @@ class AttendancesController < ApplicationController
 	end
   end
 
+  def destroy
+
+def destroy
+    @attendance = Attendance.find(params[:id])
+ 
+       @attendance.destroy
+
+
+end
+    
+
+  end
+
+
 
 private
   

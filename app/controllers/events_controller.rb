@@ -11,8 +11,16 @@ respond_to :html, :js
 end
 
   def show
+    #grab all event_ids of user's attendances
+    #then match 
+    #event.random
+    # @random_event = random_event(current_user)
+    # binding.pry
+
     @user = current_user
+
     @event = Event.find(params[:id])
+
     # @attendance=Attendance.new(user_id:@user.id, event_id:@event.id) 
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
     marker.lat event.latitude
@@ -82,6 +90,15 @@ private
       :zipcode,
       :user_id
     )
+  end
+
+  def random_event(user)
+    offset = rand(Event.count)
+    rand_record = Event.offset(offset.first)
+    if user.attending.include?(event)
+      random_event(user)
+    end
+    return event
   end
 
 

@@ -20,9 +20,10 @@
 		function(){
        	    $('#Attend').click(function() {
        	    	$.post("/attendances", {attendance:{user_id: <%= @user.id%>,event_id: <%= @event.id%>}}).done(function(data){
-			          $('#atten').append('<li>' + "<%=@event.name%>" + '</li>')
+			          $('#atten').append('<li>' + "<%=@event.name%>" +
+			          
 			          $('#Attend').hide()
-			          })
+			          )})
        	    })
        	})
 
@@ -32,6 +33,11 @@
 
 <body>
 <%= render 'nav' %>
+
+<div id="flash_notice" style="display:none"></div>
+    <%= content_tag :h1, yield(:title)  %>
+    <%= yield %>
+  </div>
 
 	<div style='float:left; width: 60%'  class="EventWindow" >
 
