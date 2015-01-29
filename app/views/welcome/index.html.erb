@@ -20,10 +20,12 @@
 
 	}
 
-	#signin, #signup{
+	#signin, #signup, #search{
 		height: 70px;
 		width: 200px;
 		padding: 20px;
+		/*style-type: none*/;
+
 
 	}
 
@@ -64,6 +66,17 @@
 
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
+
+	<% if user_signed_in? %>
+<div class = 'home-buttons'>
+	<div class="btn btn-warning btn-lg" id="search"> 
+		<%= link_to 'Start Searching', event_path(Event.first) %>
+	</div>
+	<div class="btn btn-warning btn-lg" id="search"> 
+		<%= link_to 'Create an event', new_event_path %>
+	</div>
+</div>
+<% end %>
 	<% if !user_signed_in? %>
 	<div class = 'home-buttons'>
 		<ul class = 'buttons-list'>
