@@ -4,27 +4,24 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.create(attendance_params)
 
     if @attendance.save
-		render json: @attendance
-	else
-		render json: @attendance.errors
-	end
+		  render json: @attendance
+	  else
+		  render json: @attendance.errors
+	  end
   end
 
-  def destroy
 
 def destroy
     @attendance = Attendance.find(params[:id])
-    if @attendance.present?
-       @attendance.destroy
+    @attendance.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @attendance.event }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
     end
-    redirect_to root_url
-end
-    
-
   end
-
-
-
+    
 private
   
   def attendance_params
@@ -32,6 +29,5 @@ private
       :user_id, :event_id
     )
   end
-
 
 end

@@ -25,6 +25,8 @@ gem 'geocoder'
 
 gem 'gmaps4rails'
 
+gem 'will_paginate', '~> 3.0.6'
+
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
