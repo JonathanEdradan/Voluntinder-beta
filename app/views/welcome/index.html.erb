@@ -12,7 +12,7 @@
 	}
 	.buttons-list {
 		list-style-type: none;
-		margin-top: 100px;
+		margin-top: 25px;
 	}
 
 	li {
@@ -24,25 +24,29 @@
 		height: 70px;
 		width: 200px;
 		padding: 20px;
+		/*style-type: none*/;
 
-	}
 
-	#signup {
-		margin-left: 100px;
 	}
 
 	body {
 		margin: 100px 30px 100px 30px;
 		
-		background-image: url('http://i60.tinypic.com/zwypeo.jpg');
+		background-image: url('http://www.richardslawgroup.com/rlg/wp-content/uploads/2013/02/pale_tan.jpg');
  		/*background-image: url('http://i60.tinypic.com/33or23d.jpg');*/
- 		background-size: cover; 
+ 		background-size: 150%; 
+ 		background-repeat: no-repeat;
+ 		background-position: center
 
  	}
 
 </style>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){ 
@@ -69,6 +73,44 @@
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
 
+
+
+<div id="myCarousel" class="carousel slide" data-interval="3000">
+  <div class="carousel-inner">
+    <div class="item active">
+       <img src ="http://www.portviewchurch.com/sites/default/files/middle_school1.jpg">
+        <div class="carousel-caption">
+    <h3>Find your next volunteer opportunity</h3>
+  </div>
+    </div>
+    <div class="item">
+      <img src="http://www.paconvention.com/Carousel%20Images/NationalTourismWeek_II.jpg"/>
+         <div class="carousel-caption">
+    <h3>Build a stronger community</h3>
+  </div>
+    </div>
+    <div class="item">
+      <img src="http://www.portviewchurch.com/sites/default/files/high_school3.jpg"/>
+        <div class="carousel-caption">
+    <h3>Volunteer now</h3>
+  </div>
+    </div>
+        <div class="item">
+      <img src="http://www.portviewchurch.com/sites/default/files/Bible_quiz.jpg"/>
+        <div class="carousel-caption">
+    <h3>All ages welcomed</h3>
+  </div>
+    </div>
+  </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+
 	<% if user_signed_in? %>
 <div class = 'home-buttons'>
 	<div class="btn btn-warning btn-lg" id="search"> 
@@ -79,6 +121,7 @@
 	</div>
 </div>
 <% end %>
+
 	<% if !user_signed_in? %>
 	<div class = 'home-buttons'>
 		<ul class = 'buttons-list'>
@@ -91,6 +134,20 @@
 
 <div id='home'>
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js">
+   $(document).ready(function(){
+    //Handles menu drop down
+    $('.dropdown-menu').find('form').click(function (e) {
+        e.stopPropagation();
+    });
+});
+$(document).ready(function(){
+        $('.carousel').carousel();
+    });
+</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </body>
 
