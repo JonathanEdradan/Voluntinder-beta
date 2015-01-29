@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Attendance, :type => :model do
+  describe 'Associations' do
+    it { is_expected.to belongs_to :events }
+    it { is_expected.to belongs_to :user }
+  end
+
   describe 'Attributes' do
     it { is_expected.to respond_to :user_id }
     it { is_expected.to respond_to :event_id }

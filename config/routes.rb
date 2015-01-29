@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: { registrations: "users/registrations" }\
+  devise_for :users, controllers: { registrations: "users/registrations" }
+  get 'welcome/index'
 
   # post 'attendances'
   # The priority is based upon order of creation: first created -> highest priority.
