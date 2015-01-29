@@ -1,11 +1,11 @@
 <style>
-	.Links {
-		font-size: 80px;
-	}
+.Links {
+	font-size: 80px;
+}
 
-	.EventWindow {
-		font-size: 10px;
-	}
+.EventWindow {
+	font-size: 10px;
+}
 
 </style>
 <head> 
@@ -15,31 +15,18 @@
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<script type="text/javascript">
+	var count = 0;
+	$(document).ready(
+		function(){
+       	    $('#Attend').click(function() {
+       	    	$.post("/attendances", {attendance:{user_id: <%= @user.id%>,event_id: <%= @event.id%>}}).done(function(data){
+			          $('#atten').append('<li>' + "<%=@event.name%>" + '</li>')
+			          $('#Attend').hide()
+			          })
+       	    })
+       	})
 
-		$(document).ready(
-			function(){
-				$('#Attend').click(function() {
-					$.post("/attendances", {attendance:{user_id: <%= @user.id%>,event_id: <%= @event.id%>}}).done(function(){
-						$('#atten').load('');
-					})
-				})
-			})
-
-
-      //  $.ajax({
-          //          type: "POST",
-          //          url: "/attendances",
-          //          data: {
-          //                user_id: <%= @user.id%>,
-          //                event_id:<%= @event.id%>         }
-      //  }).done
-      //    ($('#attendanceContainer').reload
-      //    );
-        //    }
-        
-        // )})
-
-</script>
+	</script>
 
 </head>
 
@@ -57,13 +44,13 @@
 		</div>
 
 		<script type="text/javascript">
-			handler = Gmaps.build('Google');
-			handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-				markers = handler.addMarkers(<%=raw @hash.to_json %>);
-				handler.bounds.extendWith(markers);
-				handler.fitMapToBounds();
-				handler.getMap().setZoom(13)
-			});
+		handler = Gmaps.build('Google');
+		handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+			markers = handler.addMarkers(<%=raw @hash.to_json %>);
+			handler.bounds.extendWith(markers);
+			handler.fitMapToBounds();
+			handler.getMap().setZoom(13)
+		});
 		</script>
 		<br>
 		<p>
@@ -84,7 +71,7 @@
 		</p>
 
 		<div class="Links">
-			<%= link_to 'X', event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
+		<%= link_to 'X', event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
 		</div>
 
 		<div id='Attend'>
@@ -105,7 +92,8 @@
 				<li> <%= item.name %> </li>
 				<% end %>
 			</ul>
-		</div>
+
+
 
 	</div>
 </body>
