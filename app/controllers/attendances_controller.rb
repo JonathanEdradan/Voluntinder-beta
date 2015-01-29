@@ -10,6 +10,20 @@ class AttendancesController < ApplicationController
 	end
   end
 
+  def destroy
+
+def destroy
+    @attendance = Attendance.find(params[:id])
+    if @attendance.present?
+       @attendance.destroy
+    end
+    redirect_to root_url
+end
+    
+
+  end
+
+
 
 private
   

@@ -20,7 +20,7 @@
 		function(){
        	    $('#Attend').click(function() {
        	    	$.post("/attendances", {attendance:{user_id: <%= @user.id%>,event_id: <%= @event.id%>}}).done(function(data){
-			          $('#atten').append('<li>' + "<%=@event.name%>" + '</li>')
+			          $('#atten').append('<li>' + "<%=@event.name%>"  + '</li>')
 			          $('#Attend').hide()
 			          })
        	    })
@@ -89,10 +89,10 @@
 		<div id='attendanceContainer'>
 			<ul id="atten">
 				<% @user.attended_events.each do |item| %>
+
 				<li> <%= item.name %> </li>
 				<% end %>
 			</ul>
-
 
 
 	</div>
