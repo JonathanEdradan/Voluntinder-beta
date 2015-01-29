@@ -12,7 +12,7 @@ end
   def show
     @user = current_user
     @event = Event.find(params[:id])
-    @attendance=Attendance.new(user_id:@user.id, event_id:@event.id) 
+    # @attendance=Attendance.new(user_id:@user.id, event_id:@event.id) 
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
     marker.lat event.latitude
     marker.lng event.longitude

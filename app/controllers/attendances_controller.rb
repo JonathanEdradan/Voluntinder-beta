@@ -2,7 +2,6 @@ class AttendancesController < ApplicationController
 
   def create
     @attendance = Attendance.create(attendance_params)
-    
 
     if @attendance.save
 		render json: @attendance
