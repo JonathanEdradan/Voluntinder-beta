@@ -11,8 +11,11 @@ respond_to :html, :js
 end
 
   def show
+
     @events = Event.order("name").page(params[:id]).per_page(1)
+
     @event = Event.find(params[:id])
+
     # @attendance=Attendance.new(user_id:@user.id, event_id:@event.id) 
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat event.latitude
@@ -94,9 +97,6 @@ private
       :user_id
     )
   end
-
-
-
 
 
 end
