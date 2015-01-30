@@ -68,7 +68,7 @@ end
   #     format.js   { render :layout => false }
   #   end
   # end
-    @event = Event.find(params[:id])
+    @event = Event.find(event_params[:id])
     @event.destroy
     respond_to do |format|
     format.html { redirect_to root_url, notice: 'User was successfully destroyed.' }
@@ -97,6 +97,7 @@ private
       :user_id
     )
   end
+
 
 end
 
