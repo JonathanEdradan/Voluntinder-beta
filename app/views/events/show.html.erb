@@ -1,11 +1,11 @@
 <style>
-.Links {
-	font-size: 80px;
-}
+	.Links {
+		font-size: 80px;
+	}
 
-.EventWindow {
-	font-size: 10px;
-}
+	.EventWindow {
+		font-size: 10px;
+	}
 
 </style>
 <head> 
@@ -16,23 +16,23 @@
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<script type="text/javascript">
-	var count = 0;
-	$(document).ready(
-		function(){
-       	    $('#Attend').click(function() {
-       	    	$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
-			          $('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete">Delete</a></li>')
-			          $('#Attend').hide()
-			          })
-       	    })
-       	})
+		var count = 0;
+		$(document).ready(
+			function(){
+				$('#Attend').click(function() {
+					$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
+						$('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete">  Delete</a></li>')
+						$('#Attend').hide()
+					})
+				})
+			})
 
 	</script>
 
 </head>
 
 <body>
-<%= render 'nav' %>
+	<%= render 'nav' %>
 
 
 	<div style='float:left; width: 60%'  class="EventWindow" >
@@ -46,13 +46,13 @@
 		</div>
 
 		<script type="text/javascript">
-		handler = Gmaps.build('Google');
-		handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-			markers = handler.addMarkers(<%=raw @hash.to_json %>);
-			handler.bounds.extendWith(markers);
-			handler.fitMapToBounds();
-			handler.getMap().setZoom(13)
-		});
+			handler = Gmaps.build('Google');
+			handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+				markers = handler.addMarkers(<%=raw @hash.to_json %>);
+				handler.bounds.extendWith(markers);
+				handler.fitMapToBounds();
+				handler.getMap().setZoom(13)
+			});
 		</script>
 		<br>
 		<p>
@@ -72,9 +72,10 @@
 			<%= @event.zipcode %>
 		</p>
 
-		<div class="Links">
-		<%= link_to 'X', event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
+		<div class="Links">	
+			<%= link_to 'X', event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
 		</div>
+
 
 		<div id='Attend'>
 			<a  id="signin" class="btn btn-warning btn-lg" role="button">Yes</a> 
@@ -91,14 +92,13 @@
 		<div id='attendanceContainer'>
 			<ul id="atten">
 				<% current_user.attended_events.each do |item| %>
-				<li> <%= item.name %> <a href= "/attendances/<%=(Attendance.find_by(params[{user_id: current_user.id, event_id: item.id}])).id%>"  data-method="delete"> 
+				<li> <%= item.name %>  <a href= "/attendances/<%=(Attendance.find_by(params[{event_id: item.id, user_id: current_user.id}])).id%>"  data-method="delete"> 
+					Delete</a> </li> 
 
-				Delete</a> </li> 
+					<% end %>
+				</ul>
 
-				<% end %>
-			</ul>
-
-	</div>		
+			</div>		
 
 
-</body>
+		</body>
