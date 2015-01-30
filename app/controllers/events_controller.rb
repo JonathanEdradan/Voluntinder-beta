@@ -11,13 +11,16 @@ respond_to :html, :js
 end
 
   def show
-    @user = current_user
+
+    @events = Event.order("name").page(params[:id]).per_page(1)
+
     @event = Event.find(params[:id])
+
     # @attendance=Attendance.new(user_id:@user.id, event_id:@event.id) 
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-    marker.lat event.latitude
-    marker.lng event.longitude
-    end  
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   def new
@@ -56,12 +59,23 @@ end
   end
 
   def destroy
+  #   @attendance = Attendance.find(attendance_params[:id])
+  #   @attendance.destroy
+
+  #   respond_to do |format|
+  #     format.html { redirect_to root_url }
+  #     format.json { head :no_content }
+  #     format.js   { render :layout => false }
+  #   end
+  # end
+    @event = Event.find(params[:id])
     @event.destroy
     respond_to do |format|
-    format.html { redirect_to events_url, notice: 'User was successfully destroyed.' }
+    format.html { redirect_to root_url, notice: 'User was successfully destroyed.' }
     format.json { head :no_content }
     end
   end
+  
 
   
 private
@@ -83,8 +97,6 @@ private
       :user_id
     )
   end
-
-
 
 end
 

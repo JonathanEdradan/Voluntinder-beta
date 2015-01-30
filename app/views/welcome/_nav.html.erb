@@ -1,4 +1,27 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<style>
+.navbar-custom {
+    background-color:#990000;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#ffffff;
+}
+
+</style>
+
+
+
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
         <% if user_signed_in? %>

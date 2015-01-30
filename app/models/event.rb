@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 	geocoded_by :address
 	has_many :users, through: :attendances 
 	has_many :attendances
+	has_many :attendees, through: :attendances, source: :user
 	belongs_to :user
 	validates :name, presence: true
 	validates :description, presence: true
