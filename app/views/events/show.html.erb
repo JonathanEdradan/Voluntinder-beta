@@ -1,27 +1,25 @@
 <style>
-	.Links {
-		font-size: 80px;
-	}
 
-	.EventWindow {
-		font-size: 20px;
-	}
+.EventWindow {
+	font-size: 20px;
 
-	body {
-		margin: 100px 30px 100px 30px;
-		
-		background-image: url('http://www.richardslawgroup.com/rlg/wp-content/uploads/2013/02/pale_tan.jpg');
- 		/*background-image: url('http://i60.tinypic.com/33or23d.jpg');*/
- 		background-size: 150%; 
- 		background-repeat: no-repeat;
- 		background-position: center
+}
 
- 	}
+body {
+	margin: 100px 30px 100px 30px;
+	
+	background-image: url('http://www.richardslawgroup.com/rlg/wp-content/uploads/2013/02/pale_tan.jpg');
+	/*background-image: url('http://i60.tinypic.com/33or23d.jpg');*/
+	background-size: 150%; 
+	background-repeat: no-repeat;
+	background-position: center
 
- 	.profile {
- 		font-size: 20px;
+}
 
- 	}
+.profile {
+	font-size: 20px;
+
+}
 
 
 </style>
@@ -35,25 +33,25 @@
 	<script type="text/javascript">
 
 
-<%def random_event(user)%>
-    <%offset = rand(Event.count)%>
-    <%rand_record = Event.offset(offset).first%>
-   <%if (current_user.attendances.find_by({user_id:current_user.id,event_id:rand_record}))%>
-    <%  random_event(user)%>
-  <%  end%>
-    <%    return rand_record%>
-<%end%>
-		<% @rand_event = random_event(current_user) %>
-			$(document).ready(
+	<%def random_event(user)%>
+	<%offset = rand(Event.count)%>
+	<%rand_record = Event.offset(offset).first%>
+	<%if (current_user.attendances.find_by({user_id:current_user.id,event_id:rand_record}))%>
+	<%  random_event(user)%>
+	<%  end%>
+	<%    return rand_record%>
+	<%end%>
+	<% @rand_event = random_event(current_user) %>
+	$(document).ready(
 		function(){
-       	    $('#Attend').click(function() {
-       	    	$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
-			          $('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete"> Delete</a></li>')
-			          $('#Attend').hide()
+			$('#Attend').click(function() {
+				$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
+					$('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete"> Delete</a></li>')
+					$('#Attend').hide()
 
-			          })
-       	    })
-       	})
+				})
+			})
+		})
 
 	</script>
 
@@ -63,7 +61,7 @@
 	<%= render 'nav' %>
 
 
-	<div style='float:left; width: 60%'  class="EventWindow" >
+	<div style='float:left; width: 55%'  class="EventWindow" >
 
 		<h1>
 			<strong> <%= @event.name %> </strong><br>
@@ -74,13 +72,13 @@
 		</div>
 
 		<script type="text/javascript">
-			handler = Gmaps.build('Google');
-			handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-				markers = handler.addMarkers(<%=raw @hash.to_json %>);
-				handler.bounds.extendWith(markers);
-				handler.fitMapToBounds();
-				handler.getMap().setZoom(13)
-			});
+		handler = Gmaps.build('Google');
+		handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+			markers = handler.addMarkers(<%=raw @hash.to_json %>);
+			handler.bounds.extendWith(markers);
+			handler.fitMapToBounds();
+			handler.getMap().setZoom(13)
+		});
 		</script>
 		<br>
 		<p>
@@ -100,20 +98,19 @@
 			<%= @event.zipcode %>
 		</p>
 
-			<span class="Links">
-		<%= link_to image_tag("http://www.clker.com/cliparts/Q/A/W/c/p/q/small-red-x-mark-th.png"), event_path(id: @rand_event.id) if Event.exists?(id: @rand_event.id)%> 
+		<span class="Links">
+			<%= link_to image_tag("http://www.clker.com/cliparts/Q/A/W/c/p/q/small-red-x-mark-th.png"), event_path(id: @rand_event.id) if Event.exists?(id: @rand_event.id)%> 
 		</span>
 
 
 
-<span id='Attend'>
-		<a> <img src="http://www.clker.com/cliparts/P/L/S/h/3/O/small-green-check-mark-th.png"></a>
+		<span id='Attend'>
+			<a> <img src="http://www.clker.com/cliparts/P/L/S/h/3/O/small-green-check-mark-th.png"></a>
 		</span>
 
 	</div>
 
-
-	<div style='float:left; width: 40%' class="profile">
+	<div style='float:right; width: 35%' class="profile">
 
 		<h1> <strong><%= current_user.first_name + ' ' + current_user.last_name %></strong> </h1>
 		<p> <strong>Events you are planning to attend: </strong></p>
@@ -123,7 +120,7 @@
 				<% current_user.attendances.each do |attendance| %>
 				<li> <%= Event.find(Attendance.find(attendance.id).event_id).name %> <a href= "/attendances/<%= attendance.id %>"  data-method="delete"> 
 
-				Delete</a> </li> 
+					Delete</a> </li> 
 
 					<% end %>
 				</ul>
@@ -131,7 +128,7 @@
 			</div>		
 
 
- </div>
+		</div>
 
 
-</body>
+	</body>
