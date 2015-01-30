@@ -81,6 +81,16 @@
 		</div>
 
 
+			<span class="Links">
+		<%= link_to image_tag("http://www.clker.com/cliparts/Q/A/W/c/p/q/small-red-x-mark-th.png"), event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
+		</span>
+
+
+
+		<span id='Attend'>
+		<img src="http://www.clker.com/cliparts/P/L/S/h/3/O/small-green-check-mark-th.png">
+		</span>
+
 	</div>
 
 
@@ -99,6 +109,9 @@
 			</ul>
 
 	</div>		
+
+
+ </div>
 
 
 </body>
