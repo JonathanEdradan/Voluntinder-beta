@@ -52,13 +52,13 @@
 	$(document).ready(function(){ 
 		$('#signin').click(function(){ 
 			$( "#home" ).load( "users/sign_in" );
-			$('.whole').slideUp(1500);
+			$('.whole').slideUp(1200);
 
 		})
 
 		$('#signup').click(function(){ 
 			$( "#home" ).load( "users/sign_up" );
-			$('.whole').slideUp(1500);
+			$('.whole').slideUp(1200);
 		
 		})
 	})	
@@ -72,7 +72,6 @@
 
 <div class = 'whole'>
 	<h1>Voluntinder</h1>
-
 
 
 <div id="myCarousel" class="carousel slide" data-interval="3000">
@@ -114,8 +113,23 @@
 	<% if user_signed_in? %>
 <div class = 'home-buttons'>
 	<div class="btn btn-warning btn-lg" id="search"> 
-		<%= link_to 'Start Searching', event_path(Event.first) %>
-	</div>
+		
+
+  <%def random_event(user)%>
+    <%offset = rand(Event.count)%>
+    <%rand_record = Event.offset(offset).first%>
+<%if (current_user.attendances.find_by({user_id:current_user.id,event_id:rand_record}))%>
+    <%  random_event(user)%>
+  <%  end%>
+<%    return rand_record%>
+  <%end%>
+		<% @event = random_event(current_user) %>
+		
+
+
+
+		<%= link_to 'Start Searching', ("/events/#{@event.id}") %>
+	</div> 
 	<div class="btn btn-warning btn-lg" id="search"> 
 		<%= link_to 'Create an event', new_event_path %>
 	</div>
