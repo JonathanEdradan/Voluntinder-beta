@@ -1,89 +1,86 @@
 <style>
 
 body {
-background-image: url('http://www.richardslawgroup.com/rlg/wp-content/uploads/2013/02/pale_tan.jpg');
-    background-size: 100%; 
-    background-repeat: no-repeat;
-    background-position: center
+  background-image: url('http://www.richardslawgroup.com/rlg/wp-content/uploads/2013/02/pale_tan.jpg');
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center
 }
 </style>
 <div class="container">
 
-<div class="row marketing">
+  <div class="row marketing">
     <div class="col-lg-6">
 
 
-<body>
-<%= form_for(@event) do |f| %>
+      <body>
+        <%= form_for(@event) do |f| %>
 
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <%= render 'nav' %>
+        <div class="field"  >
+          <%= f.label :longitude, style: 'display:none'%><br>
+          <%= f.text_field :longitude, style: 'display:none'  %>
+        </div>
+
+        <div class="field">
+          <%= f.label :latitude, style: 'display:none' %><br>
+          <%= f.text_field :latitude, style: 'display:none' %>
+        </div> 
+
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :date %><br>
+          <%= f.date_field :date %>
+        </div>
+        <div class="field">
+          <%= f.label :address %><br>
+          <%= f.text_field :address %>
+        </div>
+        <div class="field">
+          <%= f.label :city %><br>
+          <%= f.text_field :city %>
+        </div>
+        <div class="field">
+          <%= f.label :state %><br>
+          <%= f.text_field :state %>
+        </div>
+        <div class="field">
+          <%= f.label :zipcode %><br>
+          <%= f.text_field :zipcode %>
+        </div>
+        <div class="field">
+          <%= f.label :description %><br>
+          <%= f.text_area :description %>
+        </div>
+
+        <div class="actions">
+          <br>
+          <%= f.submit %>
+        </div>
+        <% end %>
+
+      </div>
+
+      <div class="col-lg-6">
+        <h1> Create event </h1>
+
+        <img src="http://media.mnn.com/sites/default/files/VolunteersLife_main_0919.jpg">
+      </div>
+
     </div>
-  <% end %>
-<%= render 'nav' %>
-<div class="field"  >
-    <%= f.label :longitude, style: 'display:none'%><br>
-    <%= f.text_field :longitude, style: 'display:none'  %>
-  </div>
 
-  <div class="field">
-    <%= f.label :latitude, style: 'display:none' %><br>
-    <%= f.text_field :latitude, style: 'display:none' %>
-  </div> 
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_field :date %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :zipcode %><br>
-    <%= f.text_field :zipcode %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <div class="actions">
-  <br>
-    <%= f.submit %>
-  </div>
-<% end %>
-
-</div>
-
-    <div class="col-lg-6">
-    <h1> TESTING </h1>
-
-    <img src="http://media.mnn.com/sites/default/files/VolunteersLife_main_0919.jpg">
-    </div>
-
-</div>
-
-
-</body>
-
-</body>
+  </body>

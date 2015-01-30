@@ -33,7 +33,7 @@
        	    	$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
 			          $('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete"> Delete</a></li>')
 			          $('#Attend').hide()
-			          $('#Next').innerText="NEXT"
+
 			          })
        	    })
        	})
@@ -83,25 +83,14 @@
 			<%= @event.zipcode %>
 		</p>
 
-
-
-		
-
-		<div class="Links" id="Next">
-		<%= link_to 'X', event_path(id: @rand_event.id) if Event.exists?(id: @rand_event.id) %> 
-		</div>
-
-
-
-
 			<span class="Links">
-		<%= link_to image_tag("http://www.clker.com/cliparts/Q/A/W/c/p/q/small-red-x-mark-th.png"), event_path(id: params[:id].to_i + 1) if Event.exists?(id: params[:id].to_i + 1) %> 
+		<%= link_to image_tag("http://www.clker.com/cliparts/Q/A/W/c/p/q/small-red-x-mark-th.png"), event_path(id: @rand_event.id) if Event.exists?(id: @rand_event.id)%> 
 		</span>
 
 
 
-		<span id='Attend'>
-		<img src="http://www.clker.com/cliparts/P/L/S/h/3/O/small-green-check-mark-th.png">
+<span id='Attend'>
+		<a> <img src="http://www.clker.com/cliparts/P/L/S/h/3/O/small-green-check-mark-th.png"></a>
 		</span>
 
 	</div>
