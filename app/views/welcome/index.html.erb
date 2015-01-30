@@ -71,8 +71,21 @@
 
 	<% if user_signed_in? %><div class = 'home-buttons'>
 	<div class="btn btn-warning btn-lg" id="search"> 
-		<% @event = Event.random_event(current_user) %>
 		
+
+  <%def random_event(user)%>
+    <%offset = rand(Event.count)%>
+    <%rand_record = Event.offset(offset).first%>
+<%if (current_user.attendances.find_by({user_id:current_user.id,event_id:rand_record}))%>
+    <%  random_event(user)%>
+  <%  end%>
+<%    return rand_record%>
+  <%end%>
+		<% @event = random_event(current_user) %>
+		
+
+
+
 		<%= link_to 'Start Searching', ("/events/#{@event.id}") %>
 	</div> 
 	<div class="btn btn-warning btn-lg" id="search"> 

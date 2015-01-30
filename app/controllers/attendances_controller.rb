@@ -11,21 +11,6 @@ class AttendancesController < ApplicationController
   end
 
   def destroy
-
-def destroy
-    @attendance = Attendance.find(params[:id])
- 
-       @attendance.destroy
-
-
-end
-    
-
-  end
-
-
-
-def destroy
     @attendance = Attendance.find(params[:id])
     @attendance.destroy
 

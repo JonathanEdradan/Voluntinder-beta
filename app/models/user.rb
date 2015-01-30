@@ -11,3 +11,4 @@ class User < ActiveRecord::Base
   			#method						#join table 		#what is being return
   has_many :attended_events, through: :attendances, source: :event
 end
+ 

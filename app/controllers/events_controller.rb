@@ -98,16 +98,5 @@ private
     )
   end
 
-
-  def random_event(user)
-    offset = rand(Event.count)
-    rand_record = Event.offset(offset.first)
-    if user.attending.include?(event)
-      random_event(user)
-    end
-    return event
-  end
-
-
 end
 
