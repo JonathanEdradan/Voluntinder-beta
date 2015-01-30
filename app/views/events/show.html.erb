@@ -32,7 +32,7 @@
        	    $('#Attend').click(function() {
        	    	$.post("/attendances", {attendance:{user_id: <%= current_user.id%>,event_id: <%= @event.id%>}}).done(function(data){
 			          $('#atten').append('<li>' + "<%= @event.name %>"  + '<a href="/attendances/' + data.id + '" data-method="delete"> Delete</a></li>')
-			          // $('#Attend').hide()
+			          $('#Attend').hide()
 			          $('#Next').innerText="NEXT"
 			          })
        	    })
@@ -92,9 +92,6 @@
 		</div>
 
 
-		<div id='Attend'>
-			<a  id="signin" class="btn btn-warning btn-lg" role="button">Yes</a> 
-		</div>
 
 
 			<span class="Links">
